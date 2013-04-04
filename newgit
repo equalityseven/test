@@ -20,16 +20,16 @@
 [ -z "$2" ] && echo "Missing repo" && exit 
 
 identity=$( awk -v id=$1 '
-    		$1 == "Host"	{ host = $2; next; } 
+			$1 == "Host"	{ host = $2; next; } 
 			$1 == "#nick"	{ nick = $2; next; } 
 			$1 == "#name"	{ name = $2; next; } 
-    		$1 == "#email"	{ 
-        		$1 = ""; 
-        		sub( /^[[:space:]]*/, "" ); 
+			$1 == "#email"	{ 
+			$1 = ""; 
+			sub( /^[[:space:]]*/, "" ); 
 				if( nick == id ) {
-        			print nick, name, $0, host;
+					print nick, name, $0, host;
 				}
-    		}' ~/.ssh/config )
+			}' ~/.ssh/config )
 
 [ -z "${identity}" ] && \
 	echo "Nickname not in ~/.ssh/config" && exit 
